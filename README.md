@@ -1,29 +1,40 @@
-# jher.io
+# AWS Infrastructure with Terraform
 
-This module is a work in progress as I setup a new website. The infrastructure is created on AWS using Terraform and consists of the below:
+This project sets up a comprehensive AWS infrastructure using Terraform. The infrastructure includes:
 
-- ecr
-- s3
-- lambda
-- api gateway
-- cloudfront
-- certificate manager
-- route53
+- ECR (Elastic Container Registry)
+- S3 (Simple Storage Service)
+- Lambda
+- API Gateway
+- CloudFront
+- ACM (AWS Certificate Manager)
+- Route53
+
+## Prerequisites
+
+- AWS CLI configured with appropriate permissions
+- Docker installed (for pushing images to ECR)
+- Terraform installed (preferably using tfenv for version management)
 
 ## Getting Started
 
 ### Install Terraform
 
-For version management it is much easier to use tfenv. It can be found at: https://github.com/tfutils/tfenv
+We recommend using tfenv for Terraform version management:
 
 ```bash
 brew install tfenv
 tfenv install <required_version>
+tfenv use <required_version>
 ```
 
-### Bootstrap The Environment
+### Bootstrap the Environment
 
-We need to create an S3 bucket for storage of Terraform state files, a route53 hosted zone, and an ECR repository. The output of all 3 will be given once this module is deployed.
+Create the initial resources:
+
+1. S3 bucket for Terraform state files
+2. Route53 hosted zone
+3. ECR repository
 
 ```bash
 cd terraform/bootstrap
@@ -51,4 +62,3 @@ cd terraform
 terraform init
 terraform plan
 terraform apply -var-file=dev.tfvars
-```
